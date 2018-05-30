@@ -27,11 +27,14 @@ int main(void)
 	TimerSet(1000);
 	TimerOn();
 	
+	initHC_SR04();
+
 	while (1) 
     {
 		while(!TimerFlag) {}
+		double dist = readHC_SR04();
 		if ( USART_IsSendReady(0) ) {
-			USART_Send(readHC_SR04(), 0);
+			USART_Send(dist, 0);
 		}
 		TimerFlag = 0;
 
