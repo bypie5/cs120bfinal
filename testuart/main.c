@@ -16,6 +16,7 @@
 #include "timer.h"
 #include "usart.h"
 #include "hc_sr04.h"
+#include "mapper.h"
 
 int main(void)
 {
@@ -32,9 +33,9 @@ int main(void)
 	while (1) 
     {
 		while(!TimerFlag) {}
-		double dist = readHC_SR04();
+		double z = readHC_SR04();
 		if ( USART_IsSendReady(0) ) {
-			USART_Send(dist, 0);
+			USART_Send(map(0, 0, z), 0);
 		}
 		TimerFlag = 0;
 
