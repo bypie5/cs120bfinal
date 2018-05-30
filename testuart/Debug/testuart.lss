@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000000e8  00000000  00000000  00000560  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000f96  00000000  00000000  00000648  2**0
+  6 .debug_info   00000f94  00000000  00000000  00000648  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a00  00000000  00000000  000015de  2**0
+  7 .debug_abbrev 00000a00  00000000  00000000  000015dc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000907  00000000  00000000  00001fde  2**0
+  8 .debug_line   00000907  00000000  00000000  00001fdc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001fc  00000000  00000000  000028e8  2**2
+  9 .debug_frame  000001fc  00000000  00000000  000028e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005e5  00000000  00000000  00002ae4  2**0
+ 10 .debug_str    000005e5  00000000  00000000  00002ae0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000006d8  00000000  00000000  000030c9  2**0
+ 11 .debug_loc    000006d8  00000000  00000000  000030c5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000f0  00000000  00000000  000037a1  2**0
+ 12 .debug_ranges 000000f0  00000000  00000000  0000379d  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -325,10 +325,6 @@ double readHC_SR04() {
 	_delay_us(10);
 	PORTA = SetBit(PORTA, 0, 0);
  230:	10 98       	cbi	0x02, 0	; 2
-	// Wait for pulse to start
-	//while(GetBit(PINA, 1) != 1) {}
-	
-	//while (PINA & 0x02) {duration++;}
 	
 	while (!(PINA & 0x02)) {}
  232:	01 9b       	sbis	0x00, 1	; 0
@@ -373,9 +369,9 @@ int main(void)
     /* Replace with your application code */
 	
 	// One second period
-	TimerSet(1000);
- 260:	68 ee       	ldi	r22, 0xE8	; 232
- 262:	73 e0       	ldi	r23, 0x03	; 3
+	TimerSet(10);
+ 260:	6a e0       	ldi	r22, 0x0A	; 10
+ 262:	70 e0       	ldi	r23, 0x00	; 0
  264:	80 e0       	ldi	r24, 0x00	; 0
  266:	90 e0       	ldi	r25, 0x00	; 0
 	TimerOn();

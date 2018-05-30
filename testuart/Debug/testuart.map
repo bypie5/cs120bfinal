@@ -572,10 +572,10 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xf96
+.debug_info     0x00000000      0xf94
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x792 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.150/gcc/dev/atmega1284/avr51/crtatmega1284.o
- .debug_info    0x00000792      0x804 main.o
+ .debug_info    0x00000792      0x802 main.o
 
 .debug_abbrev   0x00000000      0xa00
  *(.debug_abbrev)

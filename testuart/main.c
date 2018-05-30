@@ -24,7 +24,7 @@ int main(void)
     /* Replace with your application code */
 	
 	// One second period
-	TimerSet(1000);
+	TimerSet(10);
 	TimerOn();
 	
 	initHC_SR04();
