@@ -15,9 +15,17 @@ unsigned char map(double x, double y, double z, unsigned char u_color) {
 	unsigned char column = 0x00;
 	
 	if (x >= 36) {
-		
+		if (y >= 36) {
+			column = 0;
+		} else {
+			column = 1;
+		}
 	} else if (x < 36) {
-		
+		if (y >= 36) {
+			column = 3;
+		} else {
+			column = 2;
+		}
 	}
 	
 	// Only new two bits for now
