@@ -1,10 +1,3 @@
-/*
- * testuart.c
- *
- * Created: 5/29/2018 7:54:56 PM
- * Author : jdyim
- */ 
-
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,14 +21,14 @@ int main(void)
 	TimerSet(10);
 	TimerOn();
 	
-	initHC_SR04();
+	initHC_SR04(4,5);
 
 	while (1) 
     {
 		while(!TimerFlag) {}
 		double z = readHC_SR04();
 		if ( USART_IsSendReady(0) ) {
-			USART_Send(map(0, 0, z), 0);
+			USART_Send(map(0, 0, z, 0), 0);
 		}
 		TimerFlag = 0;
 
