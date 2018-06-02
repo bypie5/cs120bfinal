@@ -21,14 +21,20 @@ int main(void)
 	TimerSet(10);
 	TimerOn();
 	
-	initHC_SR04(4,5);
+	struct hc_sr04 sen_x = {0, 1};
+	struct hc_sr04 sen_y = {2, 3};
+	struct hc_sr04 sen_z = {4, 5};
+	
+	initHC_SR04();
 
 	while (1) 
     {
 		while(!TimerFlag) {}
-		double z = readHC_SR04();
+		double x = readHC_SR04(sen_x.m_trig, sen_x.m_echo);
+		double y = readHC_SR04(sen_y.m_trig, sen_y.m_echo);
+		double z = readHC_SR04(sen_z.m_trig, sen_z.m_echo);
 		if ( USART_IsSendReady(0) ) {
-			USART_Send(map(0, 0, z, 0), 0);
+			USART_Send(map(x, y, z, 0), 0);
 		}
 		TimerFlag = 0;
 

@@ -5,14 +5,20 @@
 unsigned char map(double x, double y, double z, unsigned char u_color) {
 	unsigned char val = 0x00; 
 	
-	// Determine color
+	// Determine color, this will just be passed in by a state machine
 	unsigned char color = u_color;
 	
 	val = SetBit(val, 0, GetBit(color, 0));
 	val = SetBit(val, 1, GetBit(color, 1));
 	
 	// Determine which column (0-3)
-	unsigned char column = 0x03;
+	unsigned char column = 0x00;
+	
+	if (x >= 36) {
+		
+	} else if (x < 36) {
+		
+	}
 	
 	// Only new two bits for now
 	val = SetBit(val, 4, GetBit(column, 0));

@@ -6,9 +6,12 @@
 #include <math.h>
 
 // Driver for HC-SR04 Distance Sensor
-unsigned char m_trig = 0x00;
-unsigned char m_echo = 0x00;
-void initHC_SR04(unsigned char trig, unsigned char echo) {
+struct hc_sr04 {
+	unsigned char m_trig;
+	unsigned char m_echo;
+};
+
+void initHC_SR04() {
 	/*
 	Trigger Pin A0 -> OUTPUT
 	Echo Pin A1 -> INPUT
@@ -16,12 +19,10 @@ void initHC_SR04(unsigned char trig, unsigned char echo) {
 	x x x x x x 0 1 : DDRx
 	*/
 	DDRA = 0x55; PORTA = 0xAA;
-	m_trig = trig;
-	m_echo = echo;
 }
 
 
-double readHC_SR04() {
+double readHC_SR04(unsigned char m_trig, unsigned char m_echo) {
 	double duration = 0;
 	
 	PORTA = SetBit(PORTA, m_trig, 0);
@@ -40,6 +41,5 @@ double readHC_SR04() {
 	
 	return duration;
 }
-
 
 #endif
