@@ -36,16 +36,16 @@ unsigned char map(double x, double y, double z, unsigned char u_color) {
 	// 60 - 12
 	unsigned char currLED = 0x00;
 	if (z >= 48)
-		currLED = 3;
+		currLED = 0;
 		
 	if (z < 48 && z >= 36)
-		currLED = 2;
-		
-	if (z < 36 && z >= 24)
 		currLED = 1;
 		
+	if (z < 36 && z >= 24)
+		currLED = 2;
+		
 	if (z < 24)
-		currLED = 0;
+		currLED = 3;
 		
 	val = SetBit(val, 3, GetBit(currLED, 1));
 	val = SetBit(val, 2, GetBit(currLED, 0));

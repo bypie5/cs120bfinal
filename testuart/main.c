@@ -18,7 +18,7 @@ int main(void)
     /* Replace with your application code */
 	
 	// One second period
-	TimerSet(10);
+	TimerSet(250);
 	TimerOn();
 	
 	struct hc_sr04 sen_x = {0, 1};
@@ -34,7 +34,7 @@ int main(void)
 		double y = readHC_SR04(sen_y.m_trig, sen_y.m_echo);
 		double z = readHC_SR04(sen_z.m_trig, sen_z.m_echo);
 		if ( USART_IsSendReady(0) ) {
-			USART_Send(map(x, y, z, 0), 0);
+			USART_Send(map(x, y, z, 2), 0);
 		}
 		TimerFlag = 0;
 
