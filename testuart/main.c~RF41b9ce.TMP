@@ -28,7 +28,7 @@ unsigned char pulse;
 
 // #define's
 #define Start_Restart GetBit(~PINA, 7)
-#define ThirtySeconds 120
+#define ThirtySeconds 120 
 #define QuarterSecond 250
 
 struct hc_sr04 sen_x = {0, 1};
@@ -101,8 +101,6 @@ void tick_transmit() {
 // Local vars
 unsigned char collected;
 unsigned char timer;
-char ready[80];
-unsigned char ATH_FLAG;
 void tick_gameManager() {
 	// Transition
 	switch(state_gameManager) {
@@ -111,10 +109,7 @@ void tick_gameManager() {
 		break;
 		
 		case idle_game:
-			ATH_FLAG = 0;
-			strcpy(ready, "Ready?");
-			//strcat(ready, (char)0b01111111);
-			LCD_DisplayString(1, ready);
+			LCD_DisplayString(1, "Ready?");
 			if (Start_Restart) {
 				p_x = 0;
 				p_y = 0;
@@ -263,29 +258,15 @@ void move() {
 char buffer[10];
 char msg[80];
 void display() {
-	int ath = eeprom_read_byte( (const uint8_t *)10);
-	
-	if (score > ath) {
-		eeprom_update_byte( (uint8_t *)10 , score);
-		ATH_FLAG = 1;
-	}
-	
 	pulse = 1;
 	itoa(score, buffer, 10);
 	strcpy(msg, buffer);
 	strcat(msg, " ATH: ");
-	itoa(ath, buffer, 10);
+	itoa(69, buffer, 10);
 	strcat(msg, buffer);
-	
-	if (!ATH_FLAG) {
-		strcat(msg, " NEW ");
-		strcat(msg, 0b01111111);
-	}
-	
 	LCD_DisplayString(1, msg);
-	
-	if (!ATH_FLAG)
-		LCD_WriteData(0b01111111);
+	eeprom_write_byte( (uint8_t *) 10 , 12 );
+
 }
 
 unsigned char counter = 0x00;
