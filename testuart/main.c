@@ -107,6 +107,7 @@ void tick_gameManager() {
 		break;
 		
 		case idle_game:
+			LCD_DisplayString(1, "Welcome!");
 			if (Start_Restart) {
 				p_x = 0;
 				p_y = 0;
@@ -252,7 +253,7 @@ void move() {
 
 // LCD stuff
 void display() {
-	pulse = 1;
+	LCD_DisplayString(1, score +'0');
 }
 
 unsigned char counter = 0x00;
@@ -265,7 +266,12 @@ int main(void)
 	TimerOn();
 	
 	initHC_SR04();
-
+	
+	DDRC = 0xFF; PORTC = 0x00; // LCD data lines
+	DDRD = 0xFF; PORTD = 0x00; // LCD control lines
+	
+	LCD_init();
+	
 	while (1) 
     {
 		while(!TimerFlag) {}
